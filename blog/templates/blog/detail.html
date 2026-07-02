@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h1>{{ post.title }}</h1>
+
+<p class="text-muted">
+
+{{ post.created_at }}
+
+</p>
+
+<hr>
+
+<p>
+
+{{ post.content }}
+
+</p>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">
+
+← Back
+
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

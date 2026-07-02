@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Latest Blogs</h1>
+
+<div class="row">
+
+{% for post in posts %}
+
+<div class="col-md-6 mb-4">
+
+<div class="card h-100 shadow-sm">
+
+<div class="card-body">
+
+<h3 class="card-title">
+{{ post.title }}
+</h3>
+
+<p class="text-muted">
+{{ post.created_at }}
+</p>
+
+<p class="card-text">
+{{ post.content|truncatewords:25 }}
+</p>
+
+<a href="{% url 'blog_detail' post.pk %}" class="btn btn-primary">
+
+Read More
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<h4>No blogs available.</h4>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
