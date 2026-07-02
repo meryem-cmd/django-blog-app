@@ -100,7 +100,7 @@ main
       │
       ├── feature/setup-project
       ├── feature/blog-model
-      └── feature/client-pages
+
 ```
 
 ## Future Improvements
