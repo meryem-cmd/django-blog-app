@@ -6,33 +6,45 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="card shadow-lg border-0">
 
-<div class="card-body">
+    <div class="card-body p-5">
 
-<h1>{{ post.title }}</h1>
+        <h1 class="fw-bold mb-3">
+            {{ post.title }}
+        </h1>
 
-<p class="text-muted">
+        <p class="text-muted mb-1">
+            By <strong>{{ post.author.username }}</strong>
+        </p>
 
-{{ post.created_at }}
+        <p class="text-muted">
+            Published on {{ post.created_at|date:"F d, Y" }}
+        </p>
 
-</p>
+        <hr>
 
-<hr>
+        <div class="fs-5" style="line-height: 1.8;">
+            {{ post.content|linebreaks }}
+        </div>
 
-<p>
+        <hr class="my-4">
 
-{{ post.content }}
+        <div class="d-flex justify-content-between">
 
-</p>
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                ← Back
+            </a>
 
-<a href="{% url 'home' %}" class="btn btn-secondary">
+            {% if user == post.author %}
+                <a href="{% url 'edit_blog' post.pk %}" class="btn btn-warning">
+                    ✏ Edit Post
+                </a>
+            {% endif %}
 
-← Back
+        </div>
 
-</a>
-
-</div>
+    </div>
 
 </div>
 
