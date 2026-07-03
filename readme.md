@@ -1,16 +1,24 @@
 # Django Blog App
 
-A simple blog web application built using Django as part of my internship.
+A simple blog web application built with Django as part of my internship. The project demonstrates Django fundamentals, user authentication, blog management, and a professional GitHub feature-branch workflow.
+
+---
 
 ## Features
 
+- User Authentication (Sign Up, Login, Logout)
 - Django Admin Panel
 - Blog Listing Page
 - Blog Detail Page
-- Responsive Bootstrap UI
+- Create Blog (Authenticated Users Only)
+- Edit Own Blog (Author Only)
+- Blog Ownership using Django's User Model
+- Responsive Bootstrap 5 UI
 - SQLite Database
 - Django Templates
-- Git Feature Branch Workflow
+- Professional GitHub Pull Request Workflow
+
+---
 
 ## Tech Stack
 
@@ -22,6 +30,8 @@ A simple blog web application built using Django as part of my internship.
 - SQLite
 - Git & GitHub
 
+---
+
 ## Project Structure
 
 ```
@@ -31,47 +41,52 @@ static/
 templates/
 manage.py
 requirements.txt
+db.sqlite3
 ```
+
+---
 
 ## Installation
 
-Clone the repository:
+### Clone the repository
 
 ```bash
 git clone https://github.com/meryem-cmd/django-blog-app.git
 ```
 
-Create virtual environment:
+### Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Activate:
+### Activate the virtual environment
+
+**Windows (PowerShell)**
 
 ```bash
 .venv\Scripts\Activate.ps1
 ```
 
-Install dependencies:
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Apply migrations:
+### Apply migrations
 
 ```bash
 python manage.py migrate
 ```
 
-Create superuser:
+### Create a superuser (Optional)
 
 ```bash
 python manage.py createsuperuser
 ```
 
-Run server:
+### Run the development server
 
 ```bash
 python manage.py runserver
@@ -83,30 +98,34 @@ Visit:
 http://127.0.0.1:8000/
 ```
 
-Admin:
+Admin Panel:
 
 ```
 http://127.0.0.1:8000/admin/
 ```
 
+---
+
 ## Git Workflow
 
-This project follows a feature branch workflow:
+This project follows a feature branch workflow using GitHub Pull Requests.
 
 ```
 main
 │
 └── dev
-      │
-      ├── feature/setup-project
-      ├── feature/blog-model
-
+     │
+     ├── feature/setup-project
+     ├── feature/blog-model
+     └── feature/authentication
 ```
 
-## Future Improvements
+Workflow:
 
-- Search functionality
-- Categories
-- Authentication
-- Blog creation from frontend
-- Image upload
+```
+feature/* → Pull Request → dev → Pull Request → main
+```
+
+---
+
+
