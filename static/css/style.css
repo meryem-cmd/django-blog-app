@@ -1,31 +1,29 @@
 body{
-
     background:#f8f9fa;
-
-}
-
-.navbar-brand{
-
-    font-weight:bold;
-    font-size:28px;
-
 }
 
 .card{
-
     border:none;
-    transition:0.3s;
-
+    border-radius:15px;
 }
 
 .card:hover{
-
     transform:translateY(-5px);
+    transition:.3s;
+}
 
+.navbar-brand{
+    font-size:1.5rem;
+}
+
+h1,h2,h3{
+    font-weight:700;
 }
 
 footer{
-
     margin-top:80px;
+}
 
+.btn{
+    border-radius:10px;
 }

@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Find the project root dynamically, then build all other paths relative to it.
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,11 +26,15 @@ SECRET_KEY = 'django-insecure-3#y10y_zk^cu-kf748c#^x2tj^12e7n)6lz28w5$3=2bpfx665
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Update this line in settings.py
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app', '.ngrok-free.dev']
+
+CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 
 
 # Application definition
 
+# It's a setting that tells Django which applications should be loaded and made available to the project.
 INSTALLED_APPS = [
     'blog',
     'django.contrib.admin',

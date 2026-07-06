@@ -6,29 +6,56 @@
 
 {% block content %}
 
-<div class="card shadow-lg border-0">
+<div class="card shadow">
 
     <div class="card-body p-5">
 
-        <h1 class="fw-bold mb-3">
-            {{ post.title }}
-        </h1>
-
-        <p class="text-muted mb-1">
-            By <strong>{{ post.author.username }}</strong>
-        </p>
+        <h1>{{ post.title }}</h1>
 
         <p class="text-muted">
-            Published on {{ post.created_at|date:"F d, Y" }}
+
+            By
+
+            <a href="{% url 'profile' post.author.username %}">
+                {{ post.author.username }}
+            </a>
+
+            |
+
+            {{ post.created_at|date:"F d, Y" }}
+
         </p>
+
+        {% if post.visibility == "followers" %}
+            <span class="badge bg-warning text-dark">
+                Followers Only
+            </span>
+        {% else %}
+            <span class="badge bg-success">
+                Public
+            </span>
+        {% endif %}
 
         <hr>
 
-        <div class="fs-5" style="line-height: 1.8;">
-            {{ post.content|linebreaks }}
-        </div>
+        {% if can_view %}
 
-        <hr class="my-4">
+            <div class="mb-4">
+
+                {{ post.content|linebreaks }}
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-warning">
+
+                This post is only visible to followers of
+                <strong>{{ post.author.username }}</strong>.
+
+            </div>
+
+        {% endif %}
 
         <div class="d-flex justify-content-between">
 
@@ -37,9 +64,19 @@
             </a>
 
             {% if user == post.author %}
+
+            <div>
+
                 <a href="{% url 'edit_blog' post.pk %}" class="btn btn-warning">
-                    ✏ Edit Post
+                    Edit
                 </a>
+
+                <a href="{% url 'delete_blog' post.pk %}" class="btn btn-danger">
+                    Delete
+                </a>
+
+            </div>
+
             {% endif %}
 
         </div>

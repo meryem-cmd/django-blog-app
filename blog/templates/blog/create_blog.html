@@ -6,17 +6,46 @@ Create Blog
 
 {% block content %}
 
-<h2>Create Blog</h2>
+<div class="row justify-content-center">
 
-<form method="post">
-    {% csrf_token %}
+<div class="col-md-8">
 
-    {{ form.as_p }}
+<div class="card shadow">
 
-    <button class="btn btn-primary">
-        Publish
-    </button>
+<div class="card-body">
+
+<h2 class="mb-4">
+
+Create New Blog
+
+</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="btn btn-success">
+
+Publish
+
+</button>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">
+
+Cancel
+
+</a>
 
 </form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

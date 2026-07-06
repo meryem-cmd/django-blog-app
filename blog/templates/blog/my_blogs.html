@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Blogs</h2>
+
+{% for blog in blogs %}
+
+<div class="card mb-3">
+    <div class="card-body">
+
+        <h4>{{ blog.title }}</h4>
+
+        <p>
+            Status:
+            {% if blog.is_published %}
+                <span class="text-success">Published</span>
+            {% else %}
+                <span class="text-warning">Draft</span>
+            {% endif %}
+        </p>
+
+        <a href="{% url 'edit_blog' blog.pk %}" class="btn btn-primary">
+            Edit
+        </a>
+
+        <a href="{% url 'delete_blog' blog.pk %}" class="btn btn-danger">
+            Delete
+        </a>
+
+    </div>
+</div>
+
+{% empty %}
+
+<p>You haven't written any blogs yet.</p>
+
+{% endfor %}
+
+{% endblock %}
