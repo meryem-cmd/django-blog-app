@@ -1,20 +1,11 @@
-from django.urls import path
-from . import views
-# Import the views.py file that is inside the same folder
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    # When this URL is requested in the future, call this function. not used ()
-    path("", views.home, name="home"),
-    # dynamic url, Dynamic segments let one URL pattern handle many resources.
-    path("blog/<int:pk>/", views.blog_detail, name="blog_detail"),
-    path("signup/", views.signup, name="signup"),
-    path("create/", views.create_blog, name="create_blog"),
-    path("blog/<int:pk>/edit/", views.edit_blog, name="edit_blog"),
-    path("blog/<int:pk>/delete/", views.delete_blog, name="delete_blog"),
-    path("my-blogs/", views.my_blogs, name="my_blogs"),
-    
-    path("u/<str:username>/", views.profile, name="profile"),
-    path("follow/<str:username>/", views.follow_toggle, name="follow_toggle"),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("", include("accounts.urls")),
+    path("", include("blog.urls")),
 ]
 
 # url concverters
