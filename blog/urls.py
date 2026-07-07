@@ -1,11 +1,13 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),
-    path("", include("accounts.urls")),
-    path("", include("blog.urls")),
+    path("", views.home, name="home"),
+    path("blog/<int:pk>/", views.blog_detail, name="blog_detail"),
+    path("blog/create/", views.create_blog, name="create_blog"),
+    path("blog/<int:pk>/edit/", views.edit_blog, name="edit_blog"),
+    path("blog/<int:pk>/delete/", views.delete_blog, name="delete_blog"),
+    path("my-blogs/", views.my_blogs, name="my_blogs"),
 ]
 
 # url concverters

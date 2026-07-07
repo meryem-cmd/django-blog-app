@@ -20,6 +20,7 @@ def home(request):
 
     return render(request, "blog/home.html", {"posts": posts, "active_tab": tab})
 
+@login_required
 
 def blog_detail(request, pk):
     post = get_object_or_404(Blog, pk=pk, is_published=True)
