@@ -56,7 +56,6 @@ def blog_detail(request, pk):
     can_view = post.is_visible_to(request.user)
 
     is_following_author = False
-
     if request.user.is_authenticated and request.user != post.author:
         is_following_author = Follow.objects.filter(
             follower=request.user,
@@ -161,11 +160,13 @@ def profile(request, username):
             following=profile_user
         ).exists()
 
-    # Show ALL published posts on the profile
-    posts = Blog.objects.filter(
+    all_posts = Blog.objects.filter(
         author=profile_user,
         is_published=True
     ).order_by("-created_at")
+
+    # Only keep posts this specific viewer is actually allowed to see
+    posts = [p for p in all_posts if p.is_visible_to(request.user)]
 
     context = {
         "profile_user": profile_user,
