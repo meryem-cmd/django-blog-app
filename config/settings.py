@@ -37,7 +37,7 @@ CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 # It's a setting that tells Django which applications should be loaded and made available to the project.
 INSTALLED_APPS = [
     'blog',
-    
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
