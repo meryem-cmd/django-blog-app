@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-3#y10y_zk^cu-kf748c#^x2tj^12e7n)6lz28w5$3=2bpfx665
 DEBUG = True
 
 # Update this line in settings.py
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app', '.ngrok-free.dev']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app', '.ngrok-free.dev', '.elasticbeanstalk.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 
@@ -38,6 +39,22 @@ CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 INSTALLED_APPS = [
     'blog',
     'accounts',
+    
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    
+    'modelcluster',
+    'taggit',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +71,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -137,3 +157,7 @@ from django.urls import reverse_lazy
 
 LOGIN_REDIRECT_URL = reverse_lazy("home")
 LOGOUT_REDIRECT_URL = reverse_lazy("home")
+
+
+WAGTAIL_SITE_NAME = "My Blog"
+WAGTAILADMIN_BASE_URL = "http://localhost:8000"

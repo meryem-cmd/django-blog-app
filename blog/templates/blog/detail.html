@@ -6,58 +6,51 @@
 
 {% block content %}
 
-<div class="card shadow">
+<div class="row justify-content-center">
+<div class="col-lg-9">
+
+<div class="card">
 
     <div class="card-body p-5">
 
-        <h1>{{ post.title }}</h1>
+        <div class="mb-3">
+            {% if post.visibility == "followers" %}
+                <span class="badge bg-warning text-dark">
+                    Followers Only
+                </span>
+            {% else %}
+                <span class="badge bg-success">
+                    Public
+                </span>
+            {% endif %}
+        </div>
 
-        <p class="text-muted">
+        <h1 class="mb-2">{{ post.title }}</h1>
 
+        <p class="text-muted mb-4">
             By
-
-            <a href="{% url 'profile' post.author.username %}">
-                {{ post.author.username }}
-            </a>
-
-            |
-
-            {{ post.created_at|date:"F d, Y" }}
-
+            <a href="{% url 'profile' post.author.username %}">{{ post.author.username }}</a>
+            · {{ post.created_at|date:"F d, Y" }}
         </p>
-
-        {% if post.visibility == "followers" %}
-            <span class="badge bg-warning text-dark">
-                Followers Only
-            </span>
-        {% else %}
-            <span class="badge bg-success">
-                Public
-            </span>
-        {% endif %}
 
         <hr>
 
         {% if can_view %}
 
-            <div class="mb-4">
-
+            <div class="my-4" style="font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8;">
                 {{ post.content|linebreaks }}
-
             </div>
 
         {% else %}
 
-            <div class="alert alert-warning">
-
+            <div class="alert alert-warning my-4">
                 This post is only visible to followers of
                 <strong>{{ post.author.username }}</strong>.
-
             </div>
 
         {% endif %}
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center mt-4">
 
             <a href="{% url 'home' %}" class="btn btn-secondary">
                 ← Back
@@ -65,7 +58,7 @@
 
             {% if user == post.author %}
 
-            <div>
+            <div class="d-flex gap-2">
 
                 <a href="{% url 'edit_blog' post.pk %}" class="btn btn-warning">
                     Edit
@@ -83,6 +76,9 @@
 
     </div>
 
+</div>
+
+</div>
 </div>
 
 {% endblock %}
