@@ -1,51 +1,40 @@
 {% extends "base.html" %}
 
 {% block title %}
-Create Blog
+{% if editing %}Edit Blog{% else %}Create Blog{% endif %}
 {% endblock %}
 
 {% block content %}
 
 <div class="row justify-content-center">
-
 <div class="col-md-8">
 
-<div class="card shadow">
+<div class="card">
+<div class="card-body p-5">
 
-<div class="card-body">
+    <h2 class="mb-4">
+        {% if editing %}Edit Blog{% else %}Create New Blog{% endif %}
+    </h2>
 
-<h2 class="mb-4">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-Create New Blog
+        <div class="d-flex gap-2 mt-4">
+            <button class="btn btn-success">
+                {% if editing %}Save Changes{% else %}Publish{% endif %}
+            </button>
 
-</h2>
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
 
-<form method="POST">
-
-{% csrf_token %}
-
-{{ form.as_p }}
-
-<button class="btn btn-success">
-
-Publish
-
-</button>
-
-<a href="{% url 'home' %}" class="btn btn-secondary">
-
-Cancel
-
-</a>
-
-</form>
-
+</div>
 </div>
 
 </div>
-
-</div>
-
 </div>
 
 {% endblock %}

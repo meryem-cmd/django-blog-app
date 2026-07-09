@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 
 {% block title %}
-{{ post.title }}
+{{ page.title }}
 {% endblock %}
 
 {% block content %}
@@ -13,8 +14,11 @@
 
     <div class="card-body p-5">
 
-        <div class="mb-3">
-            {% if post.visibility == "followers" %}
+        <div class="mb-3 d-flex gap-2">
+            <span class="badge bg-primary">
+                Official
+            </span>
+            {% if page.visibility == "followers" %}
                 <span class="badge bg-warning text-dark">
                     Followers Only
                 </span>
@@ -25,12 +29,22 @@
             {% endif %}
         </div>
 
-        <h1 class="mb-2">{{ post.title }}</h1>
+        <h1 class="mb-2">{{ page.title }}</h1>
 
         <p class="text-muted mb-4">
             By
-            <a href="{% url 'profile' post.author.username %}">{{ post.author.username }}</a>
-            · {{ post.created_at|date:"F d, Y" }}
+            {% if page.author %}
+                <a href="{% url 'profile' page.author.username %}">{{ page.author.username }}</a>
+            {% else %}
+                Unknown
+            {% endif %}
+            · {{ page.created_at|date:"F d, Y" }}
+
+            {% if is_following_author %}
+                <span class="badge bg-info text-dark ms-2">
+                    You follow this author
+                </span>
+            {% endif %}
         </p>
 
         <hr>
@@ -38,14 +52,14 @@
         {% if can_view %}
 
             <div class="my-4" style="font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8;">
-                {{ post.content|linebreaks }}
+                {{ page.content|richtext }}
             </div>
 
         {% else %}
 
             <div class="alert alert-warning my-4">
                 This post is only visible to followers of
-                <strong>{{ post.author.username }}</strong>.
+                <strong>{{ page.author.username }}</strong>.
             </div>
 
         {% endif %}
@@ -56,15 +70,15 @@
                 ← Back
             </a>
 
-            {% if user == post.author %}
+            {% if user.is_authenticated and user == page.author %}
 
             <div class="d-flex gap-2">
 
-                <a href="{% url 'edit_blog' post.pk %}" class="btn btn-warning">
+                <a href="{% url 'wagtailadmin_pages:edit' page.pk %}" class="btn btn-warning">
                     Edit
                 </a>
 
-                <a href="{% url 'delete_blog' post.pk %}" class="btn btn-danger">
+                <a href="{% url 'wagtailadmin_pages:delete' page.pk %}" class="btn btn-danger">
                     Delete
                 </a>
 
