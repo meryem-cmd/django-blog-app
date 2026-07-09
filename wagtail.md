@@ -330,3 +330,15 @@ This branch (`explore/wagtail`) stays separate from `main` — don't merge
 it until there's an actual decision to move forward. If the answer is
 "not now," you can just delete the branch; nothing about your real app
 changed.
+
+
+
+
+
+
+
+
+
+
+
+BlogIndexPage : this page's only job at this stage is to be the parent node at /blog/ that your future BlogPage posts will live under.

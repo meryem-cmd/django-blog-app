@@ -39,6 +39,7 @@ CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 INSTALLED_APPS = [
     'blog',
     'accounts',
+    'pages',
     
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',

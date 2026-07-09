@@ -46,7 +46,11 @@ Home
             <div class="card-body d-flex flex-column">
 
                 <div class="mb-2">
-                    {% if post.visibility == "followers" %}
+                    {% if post.source == "official" %}
+                        <span class="badge bg-primary">
+                            Official
+                        </span>
+                    {% elif post.visibility == "followers" %}
                         <span class="badge bg-warning text-dark">
                             Followers Only
                         </span>
@@ -66,10 +70,10 @@ Home
                 </p>
 
                 <p class="flex-grow-1">
-                    {{ post.content|truncatewords:30 }}
+                    {{ post.content }}
                 </p>
 
-                <a href="{% url 'blog_detail' post.pk %}" class="btn btn-primary align-self-start mt-2">
+                <a href="{{ post.url }}" class="btn btn-primary align-self-start mt-2">
                     Read More
                 </a>
 
