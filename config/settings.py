@@ -25,10 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3#y10y_zk^cu-kf748c#^x2tj^12e7n)6lz28w5$3=2bpfx665'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
 
 # Update this line in settings.py
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app', '.ngrok-free.dev', '.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '47.128.252.130', '.ngrok-free.app', '.ngrok-free.dev', '.elasticbeanstalk.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://afoot-cloning-scrimmage.ngrok-free.dev']
 
@@ -143,7 +144,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
