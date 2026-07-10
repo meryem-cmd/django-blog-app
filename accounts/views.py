@@ -1,12 +1,15 @@
-# accounts/views.py
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.utils.text import Truncator
+from django.utils.html import strip_tags
+from types import SimpleNamespace
 
 from .models import Follow
 from blog.models import Blog
+from pages.models import BlogPage
 
 
 def signup(request):
@@ -30,7 +33,34 @@ def profile(request, username):
         is_following = Follow.objects.filter(follower=request.user, following=profile_user).exists()
 
     all_posts = Blog.objects.filter(author=profile_user, is_published=True).order_by("-created_at")
-    posts = [p for p in all_posts if p.is_visible_to(request.user)]
+    posts = [
+        SimpleNamespace(
+            title=p.title,
+            content=p.content,
+            visibility=p.visibility,
+            created_at=p.created_at,
+            url=None,
+            pk=p.pk,
+            source="user",
+        )
+        for p in all_posts if p.is_visible_to(request.user)
+    ]
+
+    official_pages = BlogPage.objects.live().specific().filter(author=profile_user)
+    for p in official_pages:
+        if not p.is_visible_to(request.user):
+            continue
+        posts.append(SimpleNamespace(
+            title=p.title,
+            content=strip_tags(p.content),
+            visibility=p.visibility,
+            created_at=p.created_at,
+            url=p.url,
+            pk=None,
+            source="official",
+        ))
+
+    posts.sort(key=lambda x: x.created_at, reverse=True)
 
     context = {
         "profile_user": profile_user,
